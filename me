@@ -1,0 +1,150 @@
+systemd.unit=multi-user.target
+net.ifnames=0 biosdevname=0
+
+cmd
+
+
+oraz usunac thunderbird libreoffice itd najnowszy linux oraz hosts
+jak maja byc podlaczone narazie tylko dwa
+
+makeubuntu from scratch
+disable network name ubuntu 
+statyczny ip
+
+timeout 0
+usb
+
+https://www.tecmint.com/setup-high-availability-clustering-in-centos-ubuntu/
+https://www.swiftstack.com/docs/install/configure_networking.html
+
+
+moze to bedze lepsze
+https://www.linux.com/training-tutorials/building-beowulf-cluster-just-13-steps/
+
+
+linux from scratch
+1 i 2
+1:
+"node1"
+ssh jest ustawiony ale bez tych kluczy wiec za kazdym razem ze tak tak zgadzam sie
+etc/hosts node2 jako 10.0.0.4 ale etc resolv.conf tam jest nameserver google
+slave
+10.0.0.3 netmask 255.255.255.0 
+hasło root: 123
+haslo franek: 123
+hacluster: 123
+
+openssh-server na 22 ale bez kluczy no
+systemd.unit=multi-user.target net.ifnames=0 biosdevname=0 toram (bez quiet)
+albo moze nawet bez "toram" nw nw 
+usb ten tani 8gb "karta"
+usb 4gb taty
+
+pcs cluster auth 10.0.0.3 10.0.0.2 -u hacluster -p 123  --force
+Error: Unable to communicate with pcsd
+
+wiec kiedy bedzie wlaczony
+ow create a cluster and populate it with some nodes (the cluster name cannot exceed 15 characters, in this example, we have used examplecluster) on Node1 server.
+
+$ sudo pcs cluster setup --name examplecluster node1.example.com node2.example.c
+Now enable the cluster on boot and start the service.
+
+$ sudo pcs cluster enable --all
+$ sudo pcs cluster start --all
+jak bedzie wlaczony
+
+dobra niewiem nie moge tego ustawic, samo statyczne ip zrobie i zobaczymy jak bedzie dzialac
+dobra tego tez nie ustawie bo sa robione na starcie 
+dobra jak na starcie sie zacgowa
+
+
+
+2:
+"node2"
+10.0.0.2
+
+pcs cluster auth node1
+
+network manager disable
+sudo systemctl disable NetworkManager.service
+toram bez quiet
+
+upgrade
+
+
+
+2:
+
+10.0.0.2
+
+
+
+
+
+sudo xorriso \
+   -as mkisofs \
+   -iso-level 3 \
+   -full-iso9660-filenames \
+   -volid "NODE1" \
+   -eltorito-boot boot/grub/bios.img \
+   -no-emul-boot \
+   -boot-load-size 4 \
+   -boot-info-table \
+   --eltorito-catalog boot/grub/boot.cat \
+   --grub2-boot-info \
+   --grub2-mbr /usr/lib/grub/i386-pc/boot_hybrid.img \
+   -eltorito-alt-boot \
+   -e EFI/efiboot.img \
+   -no-emul-boot \
+   -append_partition 2 0xef isolinux/efiboot.img \
+   -output "../ubuntu-from-scratch.iso" \
+   -graft-points \
+      "." \
+      /boot/grub/bios.img=isolinux/bios.img \
+      /EFI/efiboot.img=isolinux/efiboot.img
+
+
+grub-efi-amd64
+oraz iso iso iso.....
+tak dziala config jak skopiowany do isolinux/grub.cfg
+
+
+
+ mkisofs -o ../output.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .
+edytowac isolinux teraz!!!
+on ma na starcie wyswietlic tylko ID
+nokaslr oraz jak jest 3GB ramu dziala uruchamia sie i ok
+
+aby nie uruchamial X
+multiuser.... oraz vga=0 nokaslr noresume aby bylo ok, to ma pomoc niby
+unable to find a medium containgign a live system
+
+a fn f10?
+ssh polaczyc sie?
+
+
+live-media dev cdrom?? niezbyt
+sr0??	NIEZBYT
+
+sr0 a moze bez tego same boot=casper??, samo boot=casper no nie nie
+
+boot=casper
+multi-ujser
+nokasrl
+
+
+
+noresume
+vga=0
+
+
+te opcje sa przydatne aLE PO PROSTU COS JEST Z SQUASHFS ALBO MANIFEST ALBO
+BRAK FOLDERU INSTALL BO ON NIE CHCE WYKRYC GO SKUBANY
+jest proba dwa
+
+
+tylko size i squashfs bez paczek wiec 
+brakuje ppol 
+dists 
+itd 
+przerwa
